@@ -81,10 +81,7 @@ DATABASES = {
             'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
         }
     }
-if os.getenv('DATABASE_URL') is not None:
-    import dj_database_url
 
-    DATABASES['default'] = dj_database_url.config()
 
 
 # Password validation
@@ -118,41 +115,9 @@ USE_I18N = True
 USE_L10N = True
 
 USE_TZ = True
-# 配置ckeditor
-CKEDITOR_UPLOAD_PATH = 'upload/'
-
-CKEDITOR_CONFIGS = {
-    'default': {},
-    'comment_ckeditor': {
-        'toolbar': 'custom',
-        'toolbar_custom': [
-            ['Bold', 'Italic', 'Underline', 'Strike', 'Subscript', 'Superscript'],
-            ["TextColor", "BGColor", 'RemoveFormat'],
-            ['NumberedList', 'BulletedList'],
-            ['Link', 'Unlink'],
-            ["Smiley", "SpecialChar", 'Blockquote'],
-        ],
-        'width': 'auto',
-        'height': '180',
-        'tabSpaces': 4,
-        'removePlugins': 'elementspath',
-        'resize_enabled': False,
-    }
-}
-
-
-
-
-# 缓存设置
-CACHES = {
-    'default': {
-        'BACKEND': 'django.core.cache.backends.db.DatabaseCache',
-        'LOCATION': 'my_cache_table',
-    }
-}
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.0/howto/static-files/
-
-STATIC_URL = '/static/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+STATIC_URL = "/static/"
 django_heroku.settings(locals())#这放结尾
