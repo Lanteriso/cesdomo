@@ -73,13 +73,18 @@ WSGI_APPLICATION = 'cesi.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/2.0/ref/settings/#databases
+#数据库设置
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'default': {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        }
     }
-}
+if os.getenv('DATABASE_URL') is not None:
+    import dj_database_url
+
+    DATABASES['default'] = dj_database_url.config()
 
 
 # Password validation
